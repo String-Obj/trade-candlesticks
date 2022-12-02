@@ -39,6 +39,9 @@ class DesktopChart extends StatefulWidget {
   /// changes when user scrolls along the chart
   final int index;
 
+  // 是否显示亮
+  final bool volume;
+
   /// Will chart resize vertically by visible range
   /// or by the whole dataset
   final ChartAdjust chartAdjust;
@@ -56,6 +59,7 @@ class DesktopChart extends StatefulWidget {
   final void Function(String)? onRemoveIndicator;
 
   DesktopChart({
+    required this.volume,
     required this.onScaleUpdate,
     required this.onHorizontalDragUpdate,
     required this.candleWidth,
@@ -264,7 +268,7 @@ class _DesktopChartState extends State<DesktopChart> {
                               ],
                             ),
                           ),
-                          Expanded(
+                          widget.volume ? Expanded(
                             flex: 1,
                             child: Row(
                               children: [
@@ -285,7 +289,7 @@ class _DesktopChartState extends State<DesktopChart> {
                                         barWidth: widget.candleWidth,
                                         index: widget.index,
                                         high:
-                                            HelperFunctions.getRoof(volumeHigh),
+                                        HelperFunctions.getRoof(volumeHigh),
                                         bearColor: widget.style.secondaryBear,
                                         bullColor: widget.style.secondaryBull,
                                       ),
@@ -295,7 +299,7 @@ class _DesktopChartState extends State<DesktopChart> {
                                 SizedBox(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         height: DATE_BAR_HEIGHT,
@@ -306,7 +310,7 @@ class _DesktopChartState extends State<DesktopChart> {
                                                 "-${HelperFunctions.addMetricPrefix(HelperFunctions.getRoof(volumeHigh))}",
                                                 style: TextStyle(
                                                   color:
-                                                      widget.style.borderColor,
+                                                  widget.style.borderColor,
                                                   fontSize: 12,
                                                 ),
                                               ),
@@ -320,7 +324,7 @@ class _DesktopChartState extends State<DesktopChart> {
                                 ),
                               ],
                             ),
-                          ),
+                          ) : Container(),
                           SizedBox(
                             height: DATE_BAR_HEIGHT,
                           ),

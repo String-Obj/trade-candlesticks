@@ -184,8 +184,9 @@ class _MyAppState extends State<MyApp> {
               updateCandlesFromSnapshot(snapshot);
               return Candlesticks(
                 key: Key(currentSymbol + currentInterval),
-                indicators: indicators,
+                // indicators: indicators,
                 candles: candles,
+                volume: false,
                 onLoadMoreCandles: loadMoreCandles,
                 onRemoveIndicator: (String indicator) {
                   setState(() {

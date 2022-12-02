@@ -46,11 +46,14 @@ class Candlesticks extends StatefulWidget {
 
   final CandleSticksStyle? style;
 
+  final bool volume;
+
   const Candlesticks({
     Key? key,
     required this.candles,
     this.onLoadMoreCandles,
     this.actions = const [],
+    this.volume = true,
     this.chartAdjust = ChartAdjust.visibleRange,
     this.displayZoomActions = true,
     this.loadingWidget,
@@ -189,6 +192,7 @@ class _CandlesticksState extends State<Candlesticks> {
                     Platform.isWindows ||
                     Platform.isLinux) {
                   return DesktopChart(
+                    volume: widget.volume,
                     style: style,
                     onRemoveIndicator: widget.onRemoveIndicator,
                     mainWindowDataContainer: mainWindowDataContainer!,
@@ -232,6 +236,7 @@ class _CandlesticksState extends State<Candlesticks> {
                   );
                 } else {
                   return MobileChart(
+                    volume: widget.volume,
                     style: style,
                     onRemoveIndicator: widget.onRemoveIndicator,
                     mainWindowDataContainer: mainWindowDataContainer!,

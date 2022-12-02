@@ -35,6 +35,7 @@ class MobileChart extends StatefulWidget {
   /// index of the newest candle to be displayed
   /// changes when user scrolls along the chart
   final int index;
+  final bool volume;
 
   /// holds main window indicators data and high and low prices.
   final MainWindowDataContainer mainWindowDataContainer;
@@ -52,6 +53,7 @@ class MobileChart extends StatefulWidget {
   final Function() onReachEnd;
 
   MobileChart({
+    required this.volume,
     required this.style,
     required this.onScaleUpdate,
     required this.onHorizontalDragUpdate,
@@ -251,7 +253,8 @@ class _MobileChartState extends State<MobileChart> {
                               ],
                             ),
                           ),
-                          Expanded(
+
+                          widget.volume ? Expanded(
                             flex: 1,
                             child: Row(
                               children: [
@@ -266,13 +269,14 @@ class _MobileChartState extends State<MobileChart> {
                                       ),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
+                                      padding:
+                                      const EdgeInsets.only(top: 10.0),
                                       child: VolumeWidget(
                                         candles: widget.candles,
                                         barWidth: widget.candleWidth,
                                         index: widget.index,
-                                        high:
-                                            HelperFunctions.getRoof(volumeHigh),
+                                        high: HelperFunctions.getRoof(
+                                            volumeHigh),
                                         bearColor: widget.style.secondaryBear,
                                         bullColor: widget.style.secondaryBull,
                                       ),
@@ -282,7 +286,7 @@ class _MobileChartState extends State<MobileChart> {
                                 SizedBox(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         height: DATE_BAR_HEIGHT,
@@ -292,8 +296,8 @@ class _MobileChartState extends State<MobileChart> {
                                               Text(
                                                 "-${HelperFunctions.addMetricPrefix(HelperFunctions.getRoof(volumeHigh))}",
                                                 style: TextStyle(
-                                                  color:
-                                                      widget.style.borderColor,
+                                                  color: widget
+                                                      .style.borderColor,
                                                   fontSize: 12,
                                                 ),
                                               ),
@@ -307,7 +311,7 @@ class _MobileChartState extends State<MobileChart> {
                                 ),
                               ],
                             ),
-                          ),
+                          ) : Container(),
                           SizedBox(
                             height: DATE_BAR_HEIGHT,
                           ),
