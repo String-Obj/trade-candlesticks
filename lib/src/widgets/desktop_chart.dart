@@ -148,7 +148,7 @@ class _DesktopChartState extends State<DesktopChart> {
 
         // calculate priceScale
         double chartHeight =
-            maxHeight * 0.75 - 2 * (MAIN_CHART_VERTICAL_PADDING);
+            maxHeight * (widget.volume ? 0.75 : 1) - 2 * (MAIN_CHART_VERTICAL_PADDING);
 
         // calculate highest volume
         double volumeHigh = inRangeCandles.map((e) => e.volume).reduce(max);
@@ -346,24 +346,34 @@ class _DesktopChartState extends State<DesktopChart> {
                                         .style.hoverIndicatorBackgroundColor,
                                     child: Center(
                                       child: Text(
-                                        mouseHoverY! < maxHeight * 0.75
-                                            ? HelperFunctions.priceToString(high -
+                                        widget.volume ? (
+                                            mouseHoverY! < maxHeight * 0.75
+                                                ? HelperFunctions.priceToString(high -
                                                 (mouseHoverY! -
-                                                        MAIN_CHART_VERTICAL_PADDING) /
+                                                    MAIN_CHART_VERTICAL_PADDING) /
                                                     (maxHeight * 0.75 -
                                                         2 *
                                                             MAIN_CHART_VERTICAL_PADDING) *
                                                     (high - low))
-                                            : HelperFunctions.addMetricPrefix(
+                                                : HelperFunctions.addMetricPrefix(
                                                 HelperFunctions.getRoof(
-                                                        volumeHigh) *
+                                                    volumeHigh) *
                                                     (1 -
                                                         (mouseHoverY! -
-                                                                maxHeight *
-                                                                    0.75 -
-                                                                10) /
+                                                            maxHeight *
+                                                                0.75 -
+                                                            10) /
                                                             (maxHeight * 0.25 -
-                                                                10))),
+                                                                10)))
+                                        ) : (
+                                            HelperFunctions.priceToString(high -
+                                                (mouseHoverY! -
+                                                    MAIN_CHART_VERTICAL_PADDING) /
+                                                    (maxHeight * 0.75 -
+                                                        2 *
+                                                            MAIN_CHART_VERTICAL_PADDING) *
+                                                    (high - low))
+                                        ),
                                         style: TextStyle(
                                           color:
                                               widget.style.secondaryTextColor,

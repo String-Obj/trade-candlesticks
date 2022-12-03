@@ -126,7 +126,7 @@ class _MobileChartState extends State<MobileChart> {
         }
 
         // calculate priceScale
-        double chartHeight = maxHeight * 0.75 - 2 * MAIN_CHART_VERTICAL_PADDING;
+        double chartHeight = maxHeight * (widget.volume ? 0.75 : 1) - 2 * MAIN_CHART_VERTICAL_PADDING;
 
         // calculate highest volume
         double volumeHigh = inRangeCandles.map((e) => e.volume).reduce(max);
@@ -333,24 +333,32 @@ class _MobileChartState extends State<MobileChart> {
                                         .style.hoverIndicatorBackgroundColor,
                                     child: Center(
                                       child: Text(
-                                        longPressY! < maxHeight * 0.75
-                                            ? HelperFunctions.priceToString(high -
+                                        widget.volume ? (
+                                            longPressY! < maxHeight * 0.75
+                                                ? HelperFunctions.priceToString(high -
                                                 (longPressY! -
-                                                        MAIN_CHART_VERTICAL_PADDING) /
+                                                    MAIN_CHART_VERTICAL_PADDING) /
                                                     (maxHeight * 0.75 -
                                                         2 *
                                                             MAIN_CHART_VERTICAL_PADDING) *
                                                     (high - low))
-                                            : HelperFunctions.addMetricPrefix(
+                                                : HelperFunctions.addMetricPrefix(
                                                 HelperFunctions.getRoof(
-                                                        volumeHigh) *
+                                                    volumeHigh) *
                                                     (1 -
                                                         (longPressY! -
-                                                                maxHeight *
-                                                                    0.75 -
-                                                                10) /
+                                                            maxHeight *
+                                                                0.75 -
+                                                            10) /
                                                             (maxHeight * 0.25 -
-                                                                10))),
+                                                                10)))
+                                        ):(HelperFunctions.priceToString(high -
+                                            (longPressY! -
+                                                MAIN_CHART_VERTICAL_PADDING) /
+                                                (maxHeight * 0.75 -
+                                                    2 *
+                                                        MAIN_CHART_VERTICAL_PADDING) *
+                                                (high - low))),
                                         style: TextStyle(
                                           color:
                                               widget.style.secondaryTextColor,
