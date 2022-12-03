@@ -140,7 +140,7 @@ class _CandlesticksState extends State<Candlesticks> {
             : CandleSticksStyle.light());
     return Column(
       children: [
-        if (widget.displayZoomActions == true || widget.actions.isNotEmpty) ...[
+        if (widget.displayZoomActions == true && widget.actions.isNotEmpty) ...[
           ToolBar(
             color: style.toolBarColor,
             children: [

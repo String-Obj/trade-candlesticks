@@ -186,6 +186,7 @@ class _MyAppState extends State<MyApp> {
                 key: Key(currentSymbol + currentInterval),
                 // indicators: indicators,
                 candles: candles,
+                displayZoomActions: false,
                 volume: false,
                 onLoadMoreCandles: loadMoreCandles,
                 onRemoveIndicator: (String indicator) {
