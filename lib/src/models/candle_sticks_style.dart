@@ -25,6 +25,8 @@ class CandleSticksStyle {
 
   final Color toolBarColor;
 
+  final int borderTextSize;
+
   CandleSticksStyle({
     required this.borderColor,
     required this.background,
@@ -38,6 +40,7 @@ class CandleSticksStyle {
     required this.mobileCandleHoverColor,
     required this.loadingColor,
     required this.toolBarColor,
+    this.borderTextSize = 10
   });
 
   factory CandleSticksStyle.dark({
