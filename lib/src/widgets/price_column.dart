@@ -49,7 +49,6 @@ class _PriceColumnState extends State<PriceColumn> {
     final double top = -priceTileHeight / priceScale * (newHigh - widget.high) +
         MAIN_CHART_VERTICAL_PADDING -
         priceTileHeight / 2;
-    print("top:$top");
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         widget.onScale(details.delta.dy);

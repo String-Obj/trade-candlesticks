@@ -25,7 +25,7 @@ class CandleSticksStyle {
 
   final Color toolBarColor;
 
-  final int borderTextSize;
+  final double borderTextSize;
 
   CandleSticksStyle({
     required this.borderColor,

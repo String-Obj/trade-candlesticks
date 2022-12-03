@@ -138,6 +138,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> loadMoreCandles() async {
+    print("loadMoreCandles");
     try {
       // load candles info
       final data = await repository.fetchCandles(
@@ -177,92 +178,95 @@ class _MyAppState extends State<MyApp> {
             )
           ],
         ),
-        body: Center(
-          child: StreamBuilder(
-            stream: _channel == null ? null : _channel!.stream,
-            builder: (context, snapshot) {
-              updateCandlesFromSnapshot(snapshot);
-              return Candlesticks(
-                key: Key(currentSymbol + currentInterval),
-                // indicators: indicators,
-                candles: candles,
-                displayZoomActions: false,
-                volume: false,
-                onLoadMoreCandles: loadMoreCandles,
-                onRemoveIndicator: (String indicator) {
-                  setState(() {
-                    indicators = [...indicators];
-                    indicators
-                        .removeWhere((element) => element.name == indicator);
-                  });
-                },
-                actions: [
-                  ToolBarAction(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Center(
-                            child: Container(
-                              width: 200,
-                              color: Theme.of(context).backgroundColor,
-                              child: Wrap(
-                                children: intervals
-                                    .map((e) => Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 30,
-                                            child: RawMaterialButton(
-                                              elevation: 0,
-                                              fillColor:
-                                                  const Color(0xFF494537),
-                                              onPressed: () {
-                                                fetchCandles(currentSymbol, e);
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text(
-                                                e,
-                                                style: const TextStyle(
-                                                  color: Color(0xFFF0B90A),
-                                                ),
-                                              ),
-                                            ),
+        body: Container(
+          height: 300,
+          child: Center(
+            child: StreamBuilder(
+              stream: _channel == null ? null : _channel!.stream,
+              builder: (context, snapshot) {
+                updateCandlesFromSnapshot(snapshot);
+                return Candlesticks(
+                  key: Key(currentSymbol + currentInterval),
+                  // indicators: indicators,
+                  candles: candles,
+                  displayZoomActions: true,
+                  volume: false,
+                  // onLoadMoreCandles: loadMoreCandles,
+                  onRemoveIndicator: (String indicator) {
+                    setState(() {
+                      indicators = [...indicators];
+                      indicators
+                          .removeWhere((element) => element.name == indicator);
+                    });
+                  },
+                  actions: [
+                    ToolBarAction(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Center(
+                              child: Container(
+                                width: 200,
+                                color: Theme.of(context).backgroundColor,
+                                child: Wrap(
+                                  children: intervals
+                                      .map((e) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 30,
+                                      child: RawMaterialButton(
+                                        elevation: 0,
+                                        fillColor:
+                                        const Color(0xFF494537),
+                                        onPressed: () {
+                                          fetchCandles(currentSymbol, e);
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          e,
+                                          style: const TextStyle(
+                                            color: Color(0xFFF0B90A),
                                           ),
-                                        ))
-                                    .toList(),
+                                        ),
+                                      ),
+                                    ),
+                                  ))
+                                      .toList(),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Text(
-                      currentInterval,
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        currentInterval,
+                      ),
                     ),
-                  ),
-                  ToolBarAction(
-                    width: 100,
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return SymbolsSearchModal(
-                            symbols: symbols,
-                            onSelect: (value) {
-                              fetchCandles(value, currentInterval);
-                            },
-                          );
-                        },
-                      );
-                    },
-                    child: Text(
-                      currentSymbol,
-                    ),
-                  )
-                ],
-              );
-            },
+                    ToolBarAction(
+                      width: 100,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return SymbolsSearchModal(
+                              symbols: symbols,
+                              onSelect: (value) {
+                                fetchCandles(value, currentInterval);
+                              },
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        currentSymbol,
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
