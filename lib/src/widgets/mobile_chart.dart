@@ -1,14 +1,14 @@
 import 'dart:math';
-import 'package:candlesticks/candlesticks.dart';
-import 'package:candlesticks/src/constant/view_constants.dart';
-import 'package:candlesticks/src/models/main_window_indicator.dart';
-import 'package:candlesticks/src/utils/helper_functions.dart';
-import 'package:candlesticks/src/widgets/candle_stick_widget.dart';
-import 'package:candlesticks/src/widgets/mainwindow_indicator_widget.dart';
-import 'package:candlesticks/src/widgets/price_column.dart';
-import 'package:candlesticks/src/widgets/time_row.dart';
-import 'package:candlesticks/src/widgets/top_panel.dart';
-import 'package:candlesticks/src/widgets/volume_widget.dart';
+import 'package:trade_candlesticks/candlesticks.dart';
+import 'package:trade_candlesticks/src/constant/view_constants.dart';
+import 'package:trade_candlesticks/src/models/main_window_indicator.dart';
+import 'package:trade_candlesticks/src/utils/helper_functions.dart';
+import 'package:trade_candlesticks/src/widgets/candle_stick_widget.dart';
+import 'package:trade_candlesticks/src/widgets/mainwindow_indicator_widget.dart';
+import 'package:trade_candlesticks/src/widgets/price_column.dart';
+import 'package:trade_candlesticks/src/widgets/time_row.dart';
+import 'package:trade_candlesticks/src/widgets/top_panel.dart';
+import 'package:trade_candlesticks/src/widgets/volume_widget.dart';
 import 'package:flutter/material.dart';
 import 'dash_line.dart';
 

@@ -1,4 +1,4 @@
-import 'package:candlesticks/src/models/main_window_indicator.dart';
+import 'package:trade_candlesticks/src/models/main_window_indicator.dart';
 import 'package:flutter/material.dart';
 import '../models/main_window_indicator.dart';
 

@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:candlesticks/candlesticks.dart';
+import 'package:trade_candlesticks/candlesticks.dart';
 
 class WeightedMovingAverageIndicator extends Indicator {
   WeightedMovingAverageIndicator({

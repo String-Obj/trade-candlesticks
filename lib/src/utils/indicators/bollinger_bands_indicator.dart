@@ -1,4 +1,4 @@
-import 'package:candlesticks/candlesticks.dart';
+import 'package:trade_candlesticks/candlesticks.dart';
 import 'dart:math' as math;
 import 'dart:ui';
 

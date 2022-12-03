@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:candlesticks/src/constant/view_constants.dart';
+import 'package:trade_candlesticks/src/constant/view_constants.dart';
 
 class HelperFunctions {
   static double log10(num x) => log(x) / ln10;

@@ -1,4 +1,4 @@
-import 'package:candlesticks/src/models/indicator.dart';
+import 'package:trade_candlesticks/src/models/indicator.dart';
 import 'dart:math' as math;
 import 'candle.dart';
 import 'package:flutter/material.dart';

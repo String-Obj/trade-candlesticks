@@ -1,7 +1,7 @@
-import 'package:candlesticks/src/constant/view_constants.dart';
-import 'package:candlesticks/src/models/candle.dart';
-import 'package:candlesticks/src/models/candle_sticks_style.dart';
-import 'package:candlesticks/src/utils/helper_functions.dart';
+import 'package:trade_candlesticks/src/constant/view_constants.dart';
+import 'package:trade_candlesticks/src/models/candle.dart';
+import 'package:trade_candlesticks/src/models/candle_sticks_style.dart';
+import 'package:trade_candlesticks/src/utils/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class PriceColumn extends StatefulWidget {

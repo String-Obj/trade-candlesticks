@@ -31,7 +31,7 @@ $ flutter pub get
 ## Usage
 
 ```dart
-import 'package:candlesticks/candlesticks.dart';
+import 'package:trade_candlesticks/candlesticks.dart';
 ```
 
 ### Candle

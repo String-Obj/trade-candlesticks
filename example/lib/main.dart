@@ -2,7 +2,7 @@ import 'dart:convert';
 import './candle_ticker_model.dart';
 import './repository.dart';
 import 'package:flutter/material.dart';
-import 'package:candlesticks/candlesticks.dart';
+import 'package:trade_candlesticks/candlesticks.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() {

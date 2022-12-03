@@ -1,9 +1,9 @@
 import 'dart:math';
-import 'package:candlesticks/candlesticks.dart';
-import 'package:candlesticks/src/models/main_window_indicator.dart';
-import 'package:candlesticks/src/widgets/mobile_chart.dart';
-import 'package:candlesticks/src/widgets/desktop_chart.dart';
-import 'package:candlesticks/src/widgets/toolbar.dart';
+import 'package:trade_candlesticks/candlesticks.dart';
+import 'package:trade_candlesticks/src/models/main_window_indicator.dart';
+import 'package:trade_candlesticks/src/widgets/mobile_chart.dart';
+import 'package:trade_candlesticks/src/widgets/desktop_chart.dart';
+import 'package:trade_candlesticks/src/widgets/toolbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
