@@ -103,7 +103,7 @@ class CandleStickRenderObject extends RenderBox {
   /// draws a single candle
   void paintCandle(PaintingContext context, Offset offset, int index,
       Candle candle, double range) {
-    Color color = candle.isBull ? _bullColor : _bearColor;
+    final Color color = candle.isBull ? _bullColor : _bearColor;
 
     Paint paint = Paint()
       ..color = color
@@ -111,11 +111,14 @@ class CandleStickRenderObject extends RenderBox {
       ..strokeWidth = 1;
 
     double x = size.width + offset.dx - (index + 0.5) * _candleWidth;
-
+    final Paint paint2 = Paint();
+    paint2.color = candle.isBull ? Colors.red : Colors.green;
+    paint2.strokeWidth = 1;
+    paint2.style = PaintingStyle.stroke;
     context.canvas.drawLine(
       Offset(x, offset.dy + (_high - candle.high) / range),
       Offset(x, offset.dy + (_high - candle.low) / range),
-      paint,
+      paint2,
     );
 
     final double openCandleY = offset.dy + (_high - candle.open) / range;
