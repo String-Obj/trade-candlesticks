@@ -107,38 +107,46 @@ class CandleStickRenderObject extends RenderBox {
 
     Paint paint = Paint()
       ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
+      ..style = PaintingStyle.fill;
 
     double x = size.width + offset.dx - (index + 0.5) * _candleWidth;
-    final Paint paint2 = Paint();
-    paint2.color = candle.isBull ? Colors.red : Colors.green;
-    paint2.strokeWidth = 1;
-    paint2.style = PaintingStyle.stroke;
-    context.canvas.drawLine(
-      Offset(x, offset.dy + (_high - candle.high) / range),
-      Offset(x, offset.dy + (_high - candle.low) / range),
-      paint2,
-    );
+
+
 
     final double openCandleY = offset.dy + (_high - candle.open) / range;
     final double closeCandleY = offset.dy + (_high - candle.close) / range;
 
+    double lineTopLeftY = offset.dy + (_high - candle.high) / range;
+    double lineBottomY = offset.dy + (_high - candle.low) / range;
+    double lineWidth = 0.5;
+    Paint paint2 = Paint()
+    ..color = color;
     if ((openCandleY - closeCandleY).abs() > 1) {
       context.canvas.drawLine(
         Offset(x, openCandleY),
         Offset(x, closeCandleY),
-        paint..strokeWidth = _candleWidth * 0.8,
+        paint2..strokeWidth = _candleWidth * 0.8,
       );
     } else {
       // if the candle body is too small
       final double mid = (closeCandleY + openCandleY) / 2;
+
       context.canvas.drawLine(
         Offset(x, mid - 0.5),
         Offset(x, mid + 0.5),
-        paint..strokeWidth = _candleWidth * 0.8,
+        paint2..strokeWidth = _candleWidth * 0.8,
       );
     }
+
+    Path path = Path()
+    // 画线
+    ..moveTo(x - lineWidth, lineTopLeftY)
+    ..lineTo(x - lineWidth, lineBottomY)
+    ..lineTo(x + lineWidth, lineBottomY)
+    ..lineTo(x + lineWidth, lineTopLeftY)
+    ..lineTo(x - lineWidth, lineTopLeftY)
+    ;
+    context.canvas.drawPath(path, paint);
   }
 
   @override
