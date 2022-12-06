@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:trade_candlesticks/candlesticks.dart';
 import 'package:trade_candlesticks/src/models/main_window_indicator.dart';
+import 'package:trade_candlesticks/src/widgets/candle_info_text.dart';
 import 'package:trade_candlesticks/src/widgets/mobile_chart.dart';
 import 'package:trade_candlesticks/src/widgets/desktop_chart.dart';
 import 'package:trade_candlesticks/src/widgets/toolbar.dart';
@@ -48,7 +49,9 @@ class Candlesticks extends StatefulWidget {
 
   final bool volume;
 
-  const Candlesticks({
+  CandleInfo? candleInfo;
+
+  Candlesticks({
     Key? key,
     required this.candles,
     this.onLoadMoreCandles,
@@ -60,6 +63,7 @@ class Candlesticks extends StatefulWidget {
     this.indicators,
     this.onRemoveIndicator,
     this.style,
+    this.candleInfo
   })  : assert(candles.length == 0 || candles.length > 1,
             "Please provide at least 2 candles"),
         super(key: key);
@@ -193,6 +197,7 @@ class _CandlesticksState extends State<Candlesticks> {
                     Platform.isLinux) {
                   return DesktopChart(
                     volume: widget.volume,
+                    candleInfo: widget.candleInfo,
                     style: style,
                     onRemoveIndicator: widget.onRemoveIndicator,
                     mainWindowDataContainer: mainWindowDataContainer!,
@@ -236,6 +241,7 @@ class _CandlesticksState extends State<Candlesticks> {
                   );
                 } else {
                   return MobileChart(
+                    candleInfo: widget.candleInfo,
                     volume: widget.volume,
                     style: style,
                     onRemoveIndicator: widget.onRemoveIndicator,

@@ -1,20 +1,26 @@
+import 'dart:js';
+
 import 'package:trade_candlesticks/src/models/candle.dart';
 import 'package:trade_candlesticks/src/utils/helper_functions.dart';
 import 'package:flutter/material.dart';
 
+typedef CandleInfo = Widget Function(BuildContext context, Candle candle);
+
 class CandleInfoText extends StatelessWidget {
-  const CandleInfoText({
+  CandleInfoText({
     Key? key,
     required this.candle,
     required this.bullColor,
     required this.bearColor,
     required this.defaultStyle,
+    this.candleInfo
   }) : super(key: key);
 
   final Candle candle;
   final Color bullColor;
   final Color bearColor;
   final TextStyle defaultStyle;
+  CandleInfo? candleInfo;
 
   String numberFormat(int value) {
     return "${value < 10 ? 0 : ""}$value";
@@ -26,42 +32,44 @@ class CandleInfoText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        text: dateFormatter(candle.date),
-        style: defaultStyle,
-        children: <TextSpan>[
-          TextSpan(text: "   O:"),
-          TextSpan(
-            text: HelperFunctions.priceToString(candle.open),
-            style: TextStyle(
-              color: candle.isBull ? bullColor : bearColor,
+    if (candleInfo == null) {
+      return RichText(
+        text: TextSpan(
+          text: dateFormatter(candle.date),
+          style: defaultStyle,
+          children: <TextSpan>[
+            TextSpan(text: "   O:"),
+            TextSpan(
+              text: HelperFunctions.priceToString(candle.open),
+              style: TextStyle(
+                color: candle.isBull ? bullColor : bearColor,
+              ),
             ),
-          ),
-
-          TextSpan(text: "   H:"),
-          TextSpan(
-            text: HelperFunctions.priceToString(candle.high),
-            style: TextStyle(
-              color: candle.isBull ? bullColor : bearColor,
+            TextSpan(text: "   H:"),
+            TextSpan(
+              text: HelperFunctions.priceToString(candle.high),
+              style: TextStyle(
+                color: candle.isBull ? bullColor : bearColor,
+              ),
             ),
-          ),
-          TextSpan(text: "   L:"),
-          TextSpan(
-            text: HelperFunctions.priceToString(candle.low),
-            style: TextStyle(
-              color: candle.isBull ? bullColor : bearColor,
+            TextSpan(text: "   L:"),
+            TextSpan(
+              text: HelperFunctions.priceToString(candle.low),
+              style: TextStyle(
+                color: candle.isBull ? bullColor : bearColor,
+              ),
             ),
-          ),
-          TextSpan(text: "   C:"),
-          TextSpan(
-            text: HelperFunctions.priceToString(candle.close),
-            style: TextStyle(
-              color: candle.isBull ? bullColor : bearColor,
+            TextSpan(text: "   C:"),
+            TextSpan(
+              text: HelperFunctions.priceToString(candle.close),
+              style: TextStyle(
+                color: candle.isBull ? bullColor : bearColor,
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }
+    return candleInfo!(context, candle);
   }
 }

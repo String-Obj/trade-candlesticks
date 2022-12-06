@@ -4,6 +4,7 @@ import 'package:trade_candlesticks/src/constant/view_constants.dart';
 import 'package:trade_candlesticks/src/models/candle_sticks_style.dart';
 import 'package:trade_candlesticks/src/models/main_window_indicator.dart';
 import 'package:trade_candlesticks/src/utils/helper_functions.dart';
+import 'package:trade_candlesticks/src/widgets/candle_info_text.dart';
 import 'package:trade_candlesticks/src/widgets/candle_stick_widget.dart';
 import 'package:trade_candlesticks/src/widgets/mainwindow_indicator_widget.dart';
 import 'package:trade_candlesticks/src/widgets/price_column.dart';
@@ -45,6 +46,7 @@ class DesktopChart extends StatefulWidget {
   /// Will chart resize vertically by visible range
   /// or by the whole dataset
   final ChartAdjust chartAdjust;
+  CandleInfo? candleInfo;
 
   final CandleSticksStyle style;
 
@@ -57,6 +59,7 @@ class DesktopChart extends StatefulWidget {
   final MainWindowDataContainer mainWindowDataContainer;
 
   final void Function(String)? onRemoveIndicator;
+
 
   DesktopChart({
     required this.volume,
@@ -72,6 +75,7 @@ class DesktopChart extends StatefulWidget {
     required this.mainWindowDataContainer,
     required this.onRemoveIndicator,
     required this.style,
+    this.candleInfo
   });
 
   @override
@@ -459,6 +463,7 @@ class _DesktopChartState extends State<DesktopChart> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 12),
                         child: TopPanel(
+                          candleInfo: widget.candleInfo,
                           style: widget.style,
                           onRemoveIndicator: widget.onRemoveIndicator,
                           currentCandle: currentCandle,

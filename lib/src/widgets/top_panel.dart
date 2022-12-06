@@ -5,7 +5,7 @@ import 'package:trade_candlesticks/src/widgets/candle_info_text.dart';
 import 'package:flutter/material.dart';
 
 class TopPanel extends StatefulWidget {
-  const TopPanel({
+  TopPanel({
     Key? key,
     required this.currentCandle,
     required this.indicators,
@@ -13,6 +13,7 @@ class TopPanel extends StatefulWidget {
     required this.unvisibleIndicators,
     required this.onRemoveIndicator,
     required this.style,
+    this.candleInfo
   }) : super(key: key);
 
   final Candle? currentCandle;
@@ -21,6 +22,7 @@ class TopPanel extends StatefulWidget {
   final List<String> unvisibleIndicators;
   final void Function(String indicatorName)? onRemoveIndicator;
   final CandleSticksStyle style;
+  CandleInfo? candleInfo;
 
   @override
   State<TopPanel> createState() => _TopPanelState();
@@ -43,6 +45,7 @@ class _TopPanelState extends State<TopPanel> {
                     candle: widget.currentCandle!,
                     bullColor: widget.style.primaryBull,
                     bearColor: widget.style.primaryBear,
+                    candleInfo: widget.candleInfo,
                     defaultStyle: TextStyle(
                         color: widget.style.borderColor, fontSize: widget.style.borderTextSize),
                   )

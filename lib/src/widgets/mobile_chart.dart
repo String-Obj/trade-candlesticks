@@ -3,6 +3,7 @@ import 'package:trade_candlesticks/candlesticks.dart';
 import 'package:trade_candlesticks/src/constant/view_constants.dart';
 import 'package:trade_candlesticks/src/models/main_window_indicator.dart';
 import 'package:trade_candlesticks/src/utils/helper_functions.dart';
+import 'package:trade_candlesticks/src/widgets/candle_info_text.dart';
 import 'package:trade_candlesticks/src/widgets/candle_stick_widget.dart';
 import 'package:trade_candlesticks/src/widgets/mainwindow_indicator_widget.dart';
 import 'package:trade_candlesticks/src/widgets/price_column.dart';
@@ -52,6 +53,8 @@ class MobileChart extends StatefulWidget {
 
   final Function() onReachEnd;
 
+  CandleInfo? candleInfo;
+
   MobileChart({
     required this.volume,
     required this.style,
@@ -66,6 +69,7 @@ class MobileChart extends StatefulWidget {
     required this.onReachEnd,
     required this.mainWindowDataContainer,
     required this.onRemoveIndicator,
+    this.candleInfo
   });
 
   @override
@@ -439,6 +443,7 @@ class _MobileChartState extends State<MobileChart> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 12),
                         child: TopPanel(
+                          candleInfo: widget.candleInfo,
                           style: widget.style,
                           onRemoveIndicator: widget.onRemoveIndicator,
                           currentCandle: currentCandle,
