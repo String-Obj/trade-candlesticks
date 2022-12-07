@@ -46,9 +46,11 @@ class _TimeRowState extends State<TimeRow> {
     int candleNumber = (step + 1) ~/ 2 - 10 + index * step + -1;
     DateTime? _time;
     if (candleNumber < 0)
-      _time = widget.candles[0].date.add(Duration(
-          milliseconds: dif.inMilliseconds ~/ -1 * step * candleNumber));
-    else if (candleNumber < widget.candles.length)
+      _time = widget.candles[0].date;
+          // .add(Duration(
+          // milliseconds: dif.inMilliseconds ~/ -1 * step * candleNumber));
+    else
+      if (candleNumber < widget.candles.length)
       _time = widget.candles[candleNumber].date;
     else {
       _time = widget.candles[0].date.subtract(
